@@ -240,3 +240,5 @@ data/processed/
 
 # Logs and outputs
 outputs/
+
+log.txt

@@ -4,10 +4,10 @@ esmini GIT BRANCH: tags/v3.0.4^0
 esmini BUILD VERSION: 6144
 [] [info] Loaded config file: /home/nickname8888/esmini/config.yml (/home/nickname8888/esmini/bin/../config.yml)
 [] [info] Loaded /home/nickname8888/adas-risk-prediction/scenarios/generated/xosc/generate_single_cutin0.xosc
-[2026-05-11 11:42:41]
+[2026-05-11 15:14:07]
 [] [info] Player options: --osc /home/nickname8888/adas-risk-prediction/scenarios/generated/xosc/generate_single_cutin0.xosc --camera_mode orbit --ground_plane auto --info_text 1 --logfile_path log.txt --log_level info --text_scale 1.0 --traj_filter 0.1 
 [] [info] No fixed timestep specified - running in realtime speed
-[] [info] Generated seed 292789430
+[] [info] Generated seed 1683106138
 [] [info] Loading /home/nickname8888/adas-risk-prediction/scenarios/generated/xosc/generate_single_cutin0.xosc (v1.3)
 [] [info] 0 variables
 [] [info] Loaded OpenDRIVE: /home/nickname8888/adas-risk-prediction/scenarios/generated/xodr/generate_single_cutin0.xodr
@@ -47,5 +47,5 @@ esmini BUILD VERSION: 6144
 [0.001] [info] maneuvuergroup_cutin_maneuver initState -> startTransition -> runningState
 [0.001] [info] cutin_maneuver initState -> startTransition -> runningState
 [0.001] [info] cutin_event initState -> initToStandbyTransition -> standbyState
-[3.068] [info] Quit request from user
-[2.562] [info] Closing
+[2.461] [info] Quit request from user
+[1.963] [info] Closing

@@ -1,0 +1,13 @@
+scenario_duration: 15
+sampling_rate_hz: 10
+
+num_scenarios_per_family: 10
+
+road:
+  num_lanes: 3
+  length: 2000
+
+output:
+  xosc_dir: scenarios/generated/xosc
+  xodr_dir: scenarios/generated/xodr
+  metadata_dir: scenarios/generated/metadata
