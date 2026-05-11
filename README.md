@@ -1,5 +1,6 @@
 # ADAS Risk Prediction
 ## Scenario-Based Driver Intent & Risk Prediction using Synthetic Traffic Simulation and Temporal Deep Learning
+<img width="626" height="429" alt="image" src="https://github.com/user-attachments/assets/26e3834d-e5de-4d9a-b253-5110152e7846" />
 
 ---
 
