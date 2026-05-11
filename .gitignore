@@ -216,3 +216,27 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+adas_env/
+
+venv/
+__pycache__/
+*.pyc
+
+data/raw/
+data/processed/
+outputs/
+
+.ipynb_checkpoints/
+
+.DS_Store
+
+# Generated scenarios
+scenarios/generated/
+
+# Raw simulation outputs
+data/raw/
+data/processed/
+
+# Logs and outputs
+outputs/

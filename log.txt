@@ -1,0 +1,51 @@
+esmini GIT REV: v3.0.4-0-1d33e9f2
+esmini GIT TAG: v3.0.4
+esmini GIT BRANCH: tags/v3.0.4^0
+esmini BUILD VERSION: 6144
+[] [info] Loaded config file: /home/nickname8888/esmini/config.yml (/home/nickname8888/esmini/bin/../config.yml)
+[] [info] Loaded /home/nickname8888/adas-risk-prediction/scenarios/generated/xosc/generate_single_cutin0.xosc
+[2026-05-11 11:42:41]
+[] [info] Player options: --osc /home/nickname8888/adas-risk-prediction/scenarios/generated/xosc/generate_single_cutin0.xosc --camera_mode orbit --ground_plane auto --info_text 1 --logfile_path log.txt --log_level info --text_scale 1.0 --traj_filter 0.1 
+[] [info] No fixed timestep specified - running in realtime speed
+[] [info] Generated seed 292789430
+[] [info] Loading /home/nickname8888/adas-risk-prediction/scenarios/generated/xosc/generate_single_cutin0.xosc (v1.3)
+[] [info] 0 variables
+[] [info] Loaded OpenDRIVE: /home/nickname8888/adas-risk-prediction/scenarios/generated/xodr/generate_single_cutin0.xodr
+[] [info] Expr ${250/3.6} = 250/3.6 = 69.4444444444
+[] [info] Add and deactivate new object "Ego" (id 0)
+[] [info] Add and deactivate new object "NPC" (id 1)
+[] [warn] Info: "overwrite" priority deprecated in v1.2. Use "override" instead. Accepting it anyway.
+[] [info] 0 parameters
+[0.000] [info] Window created at 104,146 with size 800,400
+[0.000] [info] Generating a simplistic 3D model of the road network
+[0.000] [info] Name: Ego
+[0.000] [info] Name: NPC
+[0.000] [info] Adjusted NPC bounding box to model car_red.osgb - xyz: 1.46, 0.00, 0.77 lwh: 5.04, 2.04, 1.49
+[0.000] [info] Init Ego TeleportAction initState -> startTransition -> runningState
+[0.000] [info] Starting teleport Action
+[0.000] [info] Ego New position:
+[0.000] [info] Pos(50.00, -4.50, 0.00) Rot(0.00, 0.00, 0.00) roadId 0 laneId -2 s 50.00 offset 0.00 t -4.50
+[0.000] [info] Init Ego LongitudinalAction initState -> startTransition -> runningState
+[0.000] [info] Init NPC TeleportAction initState -> startTransition -> runningState
+[0.000] [info] Starting teleport Action
+[0.000] [info] NPC New position:
+[0.000] [info] Pos(70.00, -1.50, 0.00) Rot(0.00, 0.00, 0.00) roadId 0 laneId -1 s 70.00 offset 0.00 t -1.50
+[0.000] [info] Init NPC LongitudinalAction initState -> startTransition -> runningState
+[0.000] [info] storyBoard initState -> startTransition -> runningState
+[0.000] [info] story_act_maneuvuergroup_cutin_maneuver initState -> startTransition -> runningState
+[0.000] [info] act_maneuvuergroup_cutin_maneuver initState -> initToStandbyTransition -> standbyState
+[0.000] [info] Init Ego TeleportAction runningState -> endTransition -> completeState
+[0.000] [info] Init Ego LongitudinalAction runningState -> endTransition -> completeState
+[0.000] [info] Init NPC TeleportAction runningState -> endTransition -> completeState
+[0.000] [info] Init NPC LongitudinalAction runningState -> endTransition -> completeState
+[0.001] [info] act_start: true, delay: 0.00, 0.0010 > 0.0000, edge: rising
+[0.001] [info] Trigger /------------------------------------------------
+[0.001] [info] Group 0:
+[0.001] [info] act_start: true
+[0.001] [info] Trigger  ------------------------------------------------/
+[0.001] [info] act_maneuvuergroup_cutin_maneuver standbyState -> startTransition -> runningState
+[0.001] [info] maneuvuergroup_cutin_maneuver initState -> startTransition -> runningState
+[0.001] [info] cutin_maneuver initState -> startTransition -> runningState
+[0.001] [info] cutin_event initState -> initToStandbyTransition -> standbyState
+[3.068] [info] Quit request from user
+[2.562] [info] Closing
