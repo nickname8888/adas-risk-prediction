@@ -1,167 +1,158 @@
 # ADAS Risk Prediction
 ## Scenario-Based Driver Intent & Risk Prediction using Synthetic Traffic Simulation and Temporal Deep Learning
+
 <img width="626" height="429" alt="image" src="https://github.com/user-attachments/assets/26e3834d-e5de-4d9a-b253-5110152e7846" />
 
 ---
 
 # Overview
 
-This project is a research-oriented framework for studying highway driving behavior, anticipatory risk prediction, and sim-to-real transfer in Advanced Driver Assistance Systems (ADAS).
+This project explores trajectory-based driver intent prediction and anticipatory risk estimation using synthetic highway interaction scenarios.
 
-The core idea is to generate structured synthetic traffic interaction scenarios using OpenSCENARIO/OpenDRIVE simulation, learn temporal vehicle interaction dynamics using deep learning, and evaluate whether behaviors learned in simulation transfer to real-world traffic trajectories.
+Using OpenSCENARIO/OpenDRIVE simulation and temporal deep learning, the framework generates structured traffic interactions, extracts temporal vehicle trajectories, and studies whether behaviors learned in simulation can generalize to real-world traffic.
 
-Unlike perception-heavy autonomous driving projects, this work focuses primarily on:
-
-- temporal interaction modeling
+Current focus areas:
+- trajectory-based interaction modeling
 - driver intent prediction
 - dangerous maneuver anticipation
-- trajectory-based reasoning
-- synthetic-to-real behavioral transfer
-
-The long-term goal is to investigate:
-
-> Can models trained on structured synthetic highway interactions generalize to real-world driving behavior?
+- uncertainty-aware behavior generation
+- sim-to-real transfer
 
 ---
 
-# Research Motivation
+# Current Status
 
-Modern ADAS and autonomous driving systems struggle with:
+## Completed
 
-- early intent prediction
-- ambiguous driver behavior
-- rare dangerous scenarios
-- lack of edge-case training data
-- uncertainty estimation in safety-critical settings
-
-Real-world trajectory datasets are valuable but limited in:
-
-- controllability
-- scenario diversity
-- automatic labeling
-- rare-event coverage
-
-Simulation provides a scalable and controllable alternative.
-
-This project explores whether synthetic interaction dynamics generated in simulation can serve as meaningful priors for real-world driving behavior prediction.
+- OpenSCENARIO + esmini simulation pipeline
+- Procedural highway scenario generation
+- Multiple interaction families:
+  - safe_merge
+  - aggressive_cutin
+  - hesitant_merge
+  - aborted_merge
+  - fake_drift
+  - oscillatory_indecision
+  - dense_pressure
+- Headless simulation execution
+- Temporal trajectory logging
+- `.dat → CSV` trajectory extraction pipeline
+- Professional BEV trajectory visualization system
+- Initial synthetic dataset generation framework
 
 ---
 
-# Core Research Objectives
+## Current Challenges / Next Steps
 
-The project focuses on four primary research directions:
+The infrastructure pipeline is functional, but current behavior families are still too simplistic and geometrically similar.
 
-## 1. Synthetic Traffic Interaction Generation
-Programmatically generate structured highway interaction scenarios using OpenSCENARIO and OpenDRIVE.
+<img width="1600" height="398" alt="WhatsApp Image 2026-05-12 at 4 42 30 PM" src="https://github.com/user-attachments/assets/7a375fde-471f-4f4a-a9c0-cf589fc87a3b" />
+
+
+Main research problems currently being addressed:
+
+- Designing behaviorally distinct trajectory families
+- Modeling realistic uncertainty and hesitation
+- Creating multi-stage temporal interaction policies
+- Generating ambiguous driver intent patterns
+- Adding interaction-aware traffic dynamics
+- Improving realism of lane-change behaviors
+- Building meaningful temporal learning signals instead of metadata-only labels
+
+Future work includes:
+- trajectory primitive engine
+- multi-agent interaction modeling
+- transformer-based temporal learning
+- uncertainty-aware prediction
+- sim-to-real transfer evaluation using highD
+
+---
+
+# Research Goals
+
+The project focuses on four main directions:
+
+## 1. Synthetic Interaction Generation
+Generate structured highway interaction scenarios using OpenSCENARIO/OpenDRIVE.
 
 Examples:
 - aggressive cut-ins
-- safe merges
-- dangerous lane changes
 - hesitant merges
 - aborted lane changes
+- fake merge drifts
+- dense traffic pressure scenarios
 
 ---
 
 ## 2. Temporal Behavior Learning
 Learn interaction dynamics between vehicles over time using sequential deep learning models.
 
-Initial models:
+Planned models:
 - LSTM
 - GRU
-- Temporal encoders
-
-Future extensions:
-- Transformer encoders
-- Graph Neural Networks
-- Multi-agent reasoning
+- Temporal Transformers
+- Multi-agent encoders
 
 ---
 
 ## 3. Anticipatory Risk Prediction
-Predict dangerous maneuvers *before* they fully unfold.
+Predict dangerous maneuvers before they fully unfold.
 
-Example task:
-
+Example:
 > Will a neighboring vehicle perform a dangerous merge within the next 2 seconds?
-
-This shifts the project from reactive classification toward anticipatory behavioral reasoning.
 
 ---
 
 ## 4. Sim-to-Real Transfer
-Evaluate whether synthetic trajectory-based behavior learning transfers to real-world highway interactions.
+Evaluate whether synthetic trajectory-based behavior learning transfers to real-world highway traffic behavior.
 
-Real-world validation will use the highD highway trajectory dataset.
+Real-world validation will use the highD dataset.
 
 ---
 
 # Technology Stack
 
 ## Simulation
-
 - OpenSCENARIO
 - OpenDRIVE
 - esmini
 - scenariogeneration
 
 ## Machine Learning
-
 - PyTorch
 - NumPy
 - Pandas
 - scikit-learn
 
 ## Visualization
-
 - Matplotlib
 - Plotly
 
 ## Infrastructure
-
 - Python
 - Git
 - GitHub
 
 ---
 
-# Project Architecture
+# Project Structure
 
 ```text
 adas-risk-prediction/
 │
-├── README.md
-├── requirements.txt
-├── .gitignore
-│
-├── configs/
-│
 ├── scenarios/
-│   ├── base/
-│   ├── generated/
-│   └── templates/
-│
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── external/
-│
 ├── src/
 │   ├── simulation/
 │   ├── preprocessing/
-│   ├── feature_engineering/
-│   ├── datasets/
 │   ├── models/
 │   ├── training/
-│   ├── evaluation/
 │   └── visualization/
 │
-├── notebooks/
-├── experiments/
-│
 ├── outputs/
-│   ├── models/
-│   ├── figures/
-│   └── logs/
+│   ├── logs/
+│   ├── trajectory_csv/
+│   └── figures/
 │
+├── data/
+├── experiments/
 └── docs/
