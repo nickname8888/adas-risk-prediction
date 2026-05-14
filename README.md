@@ -51,19 +51,30 @@ Current focus areas:
   - dense_pressure (still need to add configs for more cars and obstacles so output is incomplete)
     <img width="4571" height="1043" alt="image" src="https://github.com/user-attachments/assets/c4ecc92f-9f0b-4854-bfd9-0a8e7b21f0f7" />
 
+- Fixed OpenSCENARIO trajectory-following integration in esmini
+- Correct vehicle heading + steering-aligned trajectory execution
+- Functional lane-change visualization in simulation
+- End-to-end trajectory → OpenSCENARIO → esmini validation
 - Headless simulation execution
 - Temporal trajectory logging
 - `.dat → CSV` trajectory extraction pipeline
 - Professional BEV trajectory visualization system
 - Initial synthetic dataset generation framework
+- Family-balanced synthetic scenario generation pipeline
+- Current execution pipeline:
+  - `python3 -m src.trajectory.generate_dataset 1`
+  - `python3 -m src.simulation.generate_dataset`
+- Established complete trajectory generation → scenario conversion → simulation workflow
+- Began iterative experimentation pipeline for improving realism and behavioral diversity of generated outputs
 
 ---
 
 ## Current Challenges / Next Steps
 
-The infrastructure pipeline is functional, but current behavior families are still too simplistic and geometrically similar.
+The infrastructure pipeline is now fully functional end-to-end, including procedural trajectory generation, OpenSCENARIO export, and realistic lane-following execution inside esmini.
 
 <img width="4571" height="1118" alt="image" src="https://github.com/user-attachments/assets/5889482e-6aa1-4af5-9974-8e699e59dcb6" />
+
 
 
 
