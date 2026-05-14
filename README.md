@@ -28,12 +28,29 @@ Current focus areas:
 - Procedural highway scenario generation
 - Multiple interaction families:
   - safe_merge
+    <img width="4571" height="1158" alt="image" src="https://github.com/user-attachments/assets/a9c17e18-1d28-4a1d-bd5a-5232ad5f49d4" />
+
   - aggressive_cutin
+    <img width="4571" height="1016" alt="image" src="https://github.com/user-attachments/assets/7aab6117-fe2a-4ac6-be71-a57f93ed62ae" />
+
+  - cooperative_yield
+    <img width="4571" height="1158" alt="image" src="https://github.com/user-attachments/assets/30655076-4aa2-4527-a071-1974a8c5b403" />
+ 
   - hesitant_merge
+    <img width="4635" height="1283" alt="image" src="https://github.com/user-attachments/assets/ba503b98-4eda-4904-b243-cd04d43326b6" />
+
   - aborted_merge
+    <img width="4571" height="1053" alt="image" src="https://github.com/user-attachments/assets/abf4fb79-c249-4702-88af-3012c564bbbe" />
+
   - fake_drift
+    <img width="4571" height="1052" alt="image" src="https://github.com/user-attachments/assets/8fec785b-11d5-4f71-bbcc-7210f859d698" />
+
   - oscillatory_indecision
-  - dense_pressure
+    <img width="4571" height="1137" alt="image" src="https://github.com/user-attachments/assets/4ec3d3db-70cf-484e-82ef-7d11f7e7fa5d" />
+
+  - dense_pressure (still need to add configs for more cars and obstacles so output is incomplete)
+    <img width="4571" height="1043" alt="image" src="https://github.com/user-attachments/assets/c4ecc92f-9f0b-4854-bfd9-0a8e7b21f0f7" />
+
 - Headless simulation execution
 - Temporal trajectory logging
 - `.dat → CSV` trajectory extraction pipeline
