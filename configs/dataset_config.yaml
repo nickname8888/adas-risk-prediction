@@ -1,13 +1,24 @@
-scenario_duration: 15
-sampling_rate_hz: 10
+simulation:
+  duration: 15
+  timestep: 0.1
+  sampling_rate_hz: 10
 
-num_scenarios_per_family: 10
+dataset:
+  scenarios_per_family: 10
 
 road:
-  num_lanes: 3
   length: 2000
+  lane_count: 3
+  lane_width: 3.0
 
 output:
   xosc_dir: scenarios/generated/xosc
-  xodr_dir: scenarios/generated/xodr
   metadata_dir: scenarios/generated/metadata
+  log_dir: outputs/logs
+  csv_dir: outputs/trajectory_csv
+  figure_dir: outputs/figures
+
+visualization:
+  bev_aspect_ratio: 6
+  road_color: "#2f2f2f"
+  background_color: "#111111"

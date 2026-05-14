@@ -1,29 +1,30 @@
+from src.config.load_config import load_config
+
 from src.simulation.behavior_families import BEHAVIOR_FAMILIES
 from src.simulation.context_generator import ContextGenerator
 from src.simulation.parameter_sampler import ParameterSampler
 from src.simulation.scenario_builder import HighwayScenario
 from src.simulation.utils import ensure_dir, save_metadata
 
-XOSC_DIR = "scenarios/generated/xosc"
-META_DIR = "scenarios/generated/metadata"
+config = load_config()
 
-SCENARIOS_PER_FAMILY = 10
+XOSC_DIR = config["output"]["xosc_dir"]
+META_DIR = config["output"]["metadata_dir"]
+SCENARIOS_PER_FAMILY = config["dataset"]["scenarios_per_family"]
 
 ensure_dir(XOSC_DIR)
 ensure_dir(META_DIR)
 
 sampler = ParameterSampler()
-
 context_generator = ContextGenerator()
-
 
 def generate_shared_road():
     print("\nGenerating shared highway road...\n")
-
     road_builder = HighwayScenario(
-        params={},
-        context_vehicles=[],
-        output_name="shared_road",
+    config=config,
+    params={},
+    context_vehicles=[],
+    output_name="shared_road",
     )
     road_builder.write_shared_road()
     print("Shared road generated.\n")
@@ -42,6 +43,7 @@ def main():
                 traffic_density=params["traffic_density"]
             )
             scenario = HighwayScenario(
+                config=config,
                 params=params,
                 context_vehicles=context,
                 output_name=scenario_id,

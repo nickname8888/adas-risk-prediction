@@ -4,6 +4,7 @@ class HighwayScenario(ScenarioGenerator):
 
     def __init__(
         self,
+        config,
         params,
         context_vehicles,
         output_name,
@@ -12,6 +13,7 @@ class HighwayScenario(ScenarioGenerator):
         super().__init__()
 
         self.params = params
+        self.config = config
         self.context_vehicles = context_vehicles
         self.output_name = output_name
         self.naming = "numerical"
@@ -19,11 +21,13 @@ class HighwayScenario(ScenarioGenerator):
     def create_shared_road(self):
         road = xodr.create_road(
             [
-                xodr.Line(2000),
+                xodr.Line(
+                self.config["road"]["length"]
+                ),
             ],
             id=0,
             left_lanes=0,
-            right_lanes=3,
+            right_lanes=self.config["road"]["lane_count"],
         )
         odr = xodr.OpenDrive("highway_3lane")
         odr.add_road(road)
@@ -200,7 +204,7 @@ class HighwayScenario(ScenarioGenerator):
                 0,
                 xosc.ConditionEdge.none,
                 xosc.SimulationTimeCondition(
-                    15,
+                    self.config["simulation"]["duration"],
                     xosc.Rule.greaterThan,
                 ),
                 "stop",

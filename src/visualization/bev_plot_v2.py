@@ -1,3 +1,5 @@
+from src.config.load_config import load_config
+
 import os
 import argparse
 
@@ -6,18 +8,15 @@ import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 import numpy as np
 
+config = load_config()
 
-LANE_WIDTH = 3.0
-
+LANE_WIDTH = config["road"]["lane_width"]
 ROAD_LEFT = -10.5
 ROAD_RIGHT = 1.5
-
-ROAD_COLOR = "#2f2f2f"
+ROAD_COLOR = config["visualization"]["road_color"]
 LANE_COLOR = "white"
-
 EGO_COLOR = "#00d4ff"
 TARGET_COLOR = "#ff6b35"
-
 
 parser = argparse.ArgumentParser()
 
@@ -58,9 +57,9 @@ fig, ax = plt.subplots(
     figsize=(16, 8),
 )
 
-fig.patch.set_facecolor("#111111")
-
-ax.set_facecolor("#111111")
+BACKGROUND_COLOR = config["visualization"]["background_color"]
+fig.patch.set_facecolor(BACKGROUND_COLOR)
+ax.set_facecolor(BACKGROUND_COLOR)
 
 
 # ------------------------------------------------------------
@@ -315,8 +314,9 @@ ax.set_xlim(x_min, x_max)
 ax.set_ylim(-10, 1)
 
 # exaggerate lateral motion slightly
-ax.set_aspect(6)
-
+ax.set_aspect(
+    config["visualization"]["bev_aspect_ratio"]
+)
 
 # ------------------------------------------------------------
 # OUTPUT
