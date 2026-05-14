@@ -46,7 +46,8 @@ Current focus areas:
 
 The infrastructure pipeline is functional, but current behavior families are still too simplistic and geometrically similar.
 
-<img width="1600" height="398" alt="WhatsApp Image 2026-05-12 at 4 42 30 PM" src="https://github.com/user-attachments/assets/7a375fde-471f-4f4a-a9c0-cf589fc87a3b" />
+<img width="4624" height="1106" alt="image" src="https://github.com/user-attachments/assets/2e3e7896-6707-4716-9478-e9d5968b6320" />
+
 
 
 Main research problems currently being addressed:
