@@ -10,17 +10,17 @@ from src.trajectory.primitives import (
     longitudinal_speed_profile,
 )
 
-
 # =========================================================
 # LANE CONFIG
 # =========================================================
+
+LANE_WIDTH = 3.0
 
 LANE_CENTERS = [
     -1.5,
     -4.5,
     -7.5,
 ]
-
 
 # =========================================================
 # FAMILY PARAMETER DISTRIBUTIONS
@@ -34,8 +34,8 @@ FAMILY_BEHAVIORS = {
 
     "safe_merge": {
 
-        "merge_aggression": (0.2, 0.4),
-        "noise_strength": (0.01, 0.03),
+        "merge_aggression": (0.3, 0.5),
+        "noise_strength": (0.02, 0.05),
         "speed_variation": (0.1, 0.3),
         "commitment": "full",
         "behavior": "smooth_merge",
@@ -46,9 +46,10 @@ FAMILY_BEHAVIORS = {
     # -----------------------------------------------------
 
     "aggressive_cutin": {
-        "merge_aggression": (0.85, 1.0),
-        "noise_strength": (0.02, 0.05),
-        "speed_variation": (0.8, 1.5),
+
+        "merge_aggression": (0.9, 1.0),
+        "noise_strength": (0.03, 0.08),
+        "speed_variation": (1.0, 2.0),
         "commitment": "full",
         "behavior": "aggressive_merge",
     },
@@ -58,9 +59,10 @@ FAMILY_BEHAVIORS = {
     # -----------------------------------------------------
 
     "hesitant_merge": {
+
         "merge_aggression": (0.2, 0.4),
-        "hesitation_strength": (0.4, 0.8),
-        "noise_strength": (0.03, 0.07),
+        "hesitation_strength": (0.5, 1.2),
+        "noise_strength": (0.03, 0.08),
         "speed_variation": (0.2, 0.5),
         "commitment": "full",
         "behavior": "hesitant_merge",
@@ -71,8 +73,12 @@ FAMILY_BEHAVIORS = {
     # -----------------------------------------------------
 
     "aborted_merge": {
-        "merge_aggression": (0.4, 0.7),
-        "abort_depth": (0.5, 0.9),
+
+        "merge_aggression": (0.5, 0.8),
+
+        # fraction of lane width
+        "abort_depth": (0.5, 0.95),
+
         "noise_strength": (0.03, 0.08),
         "speed_variation": (0.2, 0.6),
         "commitment": "abort",
@@ -84,10 +90,19 @@ FAMILY_BEHAVIORS = {
     # -----------------------------------------------------
 
     "fake_drift": {
-        "drift_strength": (0.3, 1.2),
-        "noise_strength": (0.02, 0.05),
-        "speed_variation": (0.05, 0.2),
+
+        # now lane-relative and visually meaningful
+        "drift_strength": (
+            0.35 * LANE_WIDTH,
+            0.80 * LANE_WIDTH,
+        ),
+
+        "noise_strength": (0.03, 0.08),
+
+        "speed_variation": (0.05, 0.25),
+
         "commitment": "none",
+
         "behavior": "fake_drift",
     },
 
@@ -96,7 +111,8 @@ FAMILY_BEHAVIORS = {
     # -----------------------------------------------------
 
     "late_commit": {
-        "merge_aggression": (0.75, 1.0),
+
+        "merge_aggression": (0.8, 1.0),
         "noise_strength": (0.03, 0.07),
         "speed_variation": (0.5, 1.0),
         "commitment": "late",
@@ -108,8 +124,9 @@ FAMILY_BEHAVIORS = {
     # -----------------------------------------------------
 
     "cooperative_yield": {
+
         "merge_aggression": (0.3, 0.5),
-        "noise_strength": (0.02, 0.04),
+        "noise_strength": (0.02, 0.05),
         "speed_variation": (0.1, 0.4),
         "commitment": "full",
         "behavior": "cooperative_merge",
@@ -120,9 +137,10 @@ FAMILY_BEHAVIORS = {
     # -----------------------------------------------------
 
     "dense_pressure": {
-        "merge_aggression": (0.6, 0.9),
+
+        "merge_aggression": (0.7, 0.95),
         "noise_strength": (0.05, 0.1),
-        "speed_variation": (0.5, 1.2),
+        "speed_variation": (0.6, 1.5),
         "commitment": "full",
         "behavior": "dense_pressure",
     },
@@ -132,31 +150,22 @@ FAMILY_BEHAVIORS = {
     # -----------------------------------------------------
 
     "oscillatory_indecision": {
-        "oscillation_strength": (0.4, 1.0),
-        "noise_strength": (0.04, 0.09),
+
+        # lane-relative oscillation
+        "oscillation_strength": (
+            0.30 * LANE_WIDTH,
+            0.70 * LANE_WIDTH,
+        ),
+
+        "noise_strength": (0.05, 0.10),
+
         "speed_variation": (0.2, 0.6),
+
         "commitment": "oscillatory",
+
         "behavior": "oscillatory",
     },
 }
-
-
-# =========================================================
-# RANDOMIZED LANE PAIRING
-# =========================================================
-
-# def sample_lane_configuration():
-#     ego_lane = random.choice(
-#         [-1.5, -4.5]
-#     )
-
-#     if ego_lane == -1.5:
-#         target_lane = -4.5
-
-#     else:
-#         target_lane = -1.5
-
-#     return ego_lane, target_lane
 
 # =========================================================
 # FAMILY-AWARE LANE CONFIGURATION
@@ -178,16 +187,9 @@ def sample_family_lane_configuration(
 
         valid_pairs = [
 
-            # target left -> ego middle
             (-4.5, -1.5),
-
-            # target right -> ego middle
             (-4.5, -7.5),
-
-            # target middle -> ego left
             (-1.5, -4.5),
-
-            # target middle -> ego right
             (-7.5, -4.5),
         ]
 
@@ -201,24 +203,15 @@ def sample_family_lane_configuration(
         )
 
     # -----------------------------------------------------
-    # FAKE DRIFT
+    # SAME LANE DRIFT
     # -----------------------------------------------------
 
     elif lane_rule == "same_lane_drift":
 
-        # fake drift should stay safely inside road
-
-        safe_lanes = [
-            -1.5,
-            -4.5,
-            -7.5,
-        ]
-
         ego_lane_y = random.choice(
-            safe_lanes
+            LANE_CENTERS
         )
 
-        # target remains in same lane
         target_lane_y = ego_lane_y
 
         return (
@@ -251,7 +244,9 @@ def generate_family_trajectory(
     family = FAMILY_BEHAVIORS[
         family_name
     ]
+
     behavior = family["behavior"]
+
     noise_strength = random.uniform(
         *family["noise_strength"]
     )
@@ -261,6 +256,7 @@ def generate_family_trajectory(
     # -----------------------------------------------------
 
     if behavior == "smooth_merge":
+
         y = smooth_lane_change(
             t=t,
             start_time=params["merge_start_time"],
@@ -277,10 +273,11 @@ def generate_family_trajectory(
     # -----------------------------------------------------
 
     elif behavior == "aggressive_merge":
+
         y = smooth_lane_change(
             t=t,
             start_time=params["merge_start_time"],
-            duration=params["merge_duration"] * 0.6,
+            duration=params["merge_duration"] * 0.5,
             start_y=start_lane_y,
             target_y=target_lane_y,
             aggression=1.0,
@@ -291,13 +288,15 @@ def generate_family_trajectory(
     # -----------------------------------------------------
 
     elif behavior == "hesitant_merge":
+
         hesitation = random.uniform(
             *family["hesitation_strength"]
         )
+
         y = smooth_lane_change(
             t=t,
             start_time=params["merge_start_time"] + hesitation,
-            duration=params["merge_duration"] * 1.5,
+            duration=params["merge_duration"] * 1.6,
             start_y=start_lane_y,
             target_y=target_lane_y,
             aggression=0.3,
@@ -308,6 +307,7 @@ def generate_family_trajectory(
     # -----------------------------------------------------
 
     elif behavior == "aborted_merge":
+
         y = aborted_merge_motion(
             t=t,
             start_time=params["merge_start_time"],
@@ -324,6 +324,7 @@ def generate_family_trajectory(
     # -----------------------------------------------------
 
     elif behavior == "fake_drift":
+
         y = fake_drift_motion(
             t=t,
             start_time=params["merge_start_time"],
@@ -339,27 +340,29 @@ def generate_family_trajectory(
     # -----------------------------------------------------
 
     elif behavior == "late_commit":
+
         y = smooth_lane_change(
             t=t,
-            start_time=params["merge_start_time"] + 2.0,
-            duration=params["merge_duration"] * 0.5,
+            start_time=params["merge_start_time"] + 1.5,
+            duration=params["merge_duration"] * 0.45,
             start_y=start_lane_y,
             target_y=target_lane_y,
             aggression=1.0,
         )
 
     # -----------------------------------------------------
-    # COOPERATIVE YIELD
+    # COOPERATIVE MERGE
     # -----------------------------------------------------
 
     elif behavior == "cooperative_merge":
+
         y = smooth_lane_change(
             t=t,
             start_time=params["merge_start_time"],
             duration=params["merge_duration"],
             start_y=start_lane_y,
             target_y=target_lane_y,
-            aggression=0.4,
+            aggression=0.45,
         )
 
     # -----------------------------------------------------
@@ -367,13 +370,14 @@ def generate_family_trajectory(
     # -----------------------------------------------------
 
     elif behavior == "dense_pressure":
+
         y = smooth_lane_change(
             t=t,
             start_time=params["merge_start_time"],
-            duration=params["merge_duration"] * 0.7,
+            duration=params["merge_duration"] * 0.65,
             start_y=start_lane_y,
             target_y=target_lane_y,
-            aggression=0.8,
+            aggression=0.9,
         )
 
     # -----------------------------------------------------
@@ -381,6 +385,7 @@ def generate_family_trajectory(
     # -----------------------------------------------------
 
     elif behavior == "oscillatory":
+
         y = oscillatory_motion(
             t=t,
             start_time=params["merge_start_time"],
@@ -393,9 +398,13 @@ def generate_family_trajectory(
         )
 
     else:
+
         y = start_lane_y
 
-    # add small human-like imperfections
+    # -----------------------------------------------------
+    # HUMAN-LIKE IMPERFECTIONS
+    # -----------------------------------------------------
+
     y = add_lateral_noise(
         y,
         t,
@@ -404,7 +413,12 @@ def generate_family_trajectory(
 
     return y
 
+# =========================================================
+# FAMILY LANE RULES
+# =========================================================
+
 FAMILY_LANE_RULES = {
+
     "safe_merge": "adjacent_merge",
     "aggressive_cutin": "adjacent_merge",
     "hesitant_merge": "adjacent_merge",

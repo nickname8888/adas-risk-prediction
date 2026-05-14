@@ -30,63 +30,31 @@ def build_polyline_from_points(
 
     positions = []
 
-    num_points = len(
-        trajectory_points
-    )
+    for i, point in enumerate(trajectory_points):
 
-    for i, point in enumerate(
-        trajectory_points
-    ):
+        times.append(point.t)
 
         # -------------------------------------------------
-        # COMPUTE HEADING
+        # COMPUTE HEADING FROM NEXT POINT
         # -------------------------------------------------
 
-        if i < num_points - 1:
+        if i < len(trajectory_points) - 1:
 
-            next_point = (
-                trajectory_points[i + 1]
-            )
+            next_point = trajectory_points[i + 1]
 
-            dx = (
-                next_point.x - point.x
-            )
+            dx = next_point.x - point.x
+            dy = next_point.y - point.y
 
-            dy = (
-                next_point.y - point.y
-            )
-
-            heading = math.atan2(
-                dy,
-                dx,
-            )
+            heading = math.atan2(dy, dx)
 
         else:
 
-            prev_point = (
-                trajectory_points[i - 1]
-            )
+            prev_point = trajectory_points[i - 1]
 
-            dx = (
-                point.x - prev_point.x
-            )
+            dx = point.x - prev_point.x
+            dy = point.y - prev_point.y
 
-            dy = (
-                point.y - prev_point.y
-            )
-
-            heading = math.atan2(
-                dy,
-                dx,
-            )
-
-        # -------------------------------------------------
-        # STORE
-        # -------------------------------------------------
-
-        times.append(
-            point.t
-        )
+            heading = math.atan2(dy, dx)
 
         positions.append(
 
@@ -131,9 +99,15 @@ def create_follow_trajectory_action(
 
     follow_action = xosc.FollowTrajectoryAction(
         trajectory_shape,
-        xosc.FollowingMode.position,
+
+        # IMPORTANT:
+        # follow mode forces steering alignment
+        xosc.FollowingMode.follow,
+
         xosc.ReferenceContext.absolute,
+
         1.0,
+
         0,
     )
 
@@ -176,6 +150,7 @@ def create_init_actions(
 
     init.add_init_action(
         trajectory.name,
+
         xosc.TeleportAction(
 
             xosc.WorldPosition(
@@ -190,11 +165,25 @@ def create_init_actions(
     )
 
     # -----------------------------------------------------
+    # DISABLE INTERNAL CONTROLLERS
+    # -----------------------------------------------------
+
+    init.add_init_action(
+        trajectory.name,
+
+        xosc.ActivateControllerAction(
+            lateral=False,
+            longitudinal=False,
+        ),
+    )
+
+    # -----------------------------------------------------
     # INITIAL SPEED
     # -----------------------------------------------------
 
     init.add_init_action(
         trajectory.name,
+
         xosc.AbsoluteSpeedAction(
             first_point.speed,
 
