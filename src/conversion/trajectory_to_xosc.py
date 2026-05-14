@@ -1,4 +1,5 @@
 import os
+import math
 
 from scenariogeneration import xosc
 
@@ -29,7 +30,59 @@ def build_polyline_from_points(
 
     positions = []
 
-    for point in trajectory_points:
+    num_points = len(
+        trajectory_points
+    )
+
+    for i, point in enumerate(
+        trajectory_points
+    ):
+
+        # -------------------------------------------------
+        # COMPUTE HEADING
+        # -------------------------------------------------
+
+        if i < num_points - 1:
+
+            next_point = (
+                trajectory_points[i + 1]
+            )
+
+            dx = (
+                next_point.x - point.x
+            )
+
+            dy = (
+                next_point.y - point.y
+            )
+
+            heading = math.atan2(
+                dy,
+                dx,
+            )
+
+        else:
+
+            prev_point = (
+                trajectory_points[i - 1]
+            )
+
+            dx = (
+                point.x - prev_point.x
+            )
+
+            dy = (
+                point.y - prev_point.y
+            )
+
+            heading = math.atan2(
+                dy,
+                dx,
+            )
+
+        # -------------------------------------------------
+        # STORE
+        # -------------------------------------------------
 
         times.append(
             point.t
@@ -41,7 +94,7 @@ def build_polyline_from_points(
                 x=point.x,
                 y=point.y,
                 z=0,
-                h=0,
+                h=heading,
                 p=0,
                 r=0,
             )
@@ -96,7 +149,26 @@ def create_init_actions(
     trajectory,
 ):
 
-    first_point = trajectory.points[0]
+    first_point = (
+        trajectory.points[0]
+    )
+
+    second_point = (
+        trajectory.points[1]
+    )
+
+    dx = (
+        second_point.x - first_point.x
+    )
+
+    dy = (
+        second_point.y - first_point.y
+    )
+
+    initial_heading = math.atan2(
+        dy,
+        dx,
+    )
 
     # -----------------------------------------------------
     # TELEPORT
@@ -110,7 +182,7 @@ def create_init_actions(
                 x=first_point.x,
                 y=first_point.y,
                 z=0,
-                h=0,
+                h=initial_heading,
                 p=0,
                 r=0,
             )

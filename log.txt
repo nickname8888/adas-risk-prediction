@@ -3,12 +3,12 @@ esmini GIT TAG: v3.0.4
 esmini GIT BRANCH: tags/v3.0.4^0
 esmini BUILD VERSION: 6144
 [] [info] Loaded config file: /home/nickname8888/esmini/config.yml (/home/nickname8888/esmini/bin/../config.yml)
-[] [info] Loaded scenarios/generated/xosc/aborted_merge_0000.xosc
-[2026-05-14 16:05:20]
-[] [info] Player options: --osc scenarios/generated/xosc/aborted_merge_0000.xosc --camera_mode orbit --ground_plane auto --info_text 1 --logfile_path log.txt --log_level info --text_scale 1.0 --traj_filter 0.1 
+[] [info] Loaded scenarios/generated/xosc/safe_merge_0000.xosc
+[2026-05-14 16:38:44]
+[] [info] Player options: --osc scenarios/generated/xosc/safe_merge_0000.xosc --camera_mode orbit --ground_plane auto --info_text 1 --logfile_path log.txt --log_level info --text_scale 1.0 --traj_filter 0.1 
 [] [info] No fixed timestep specified - running in realtime speed
-[] [info] Generated seed 1775971844
-[] [info] Loading scenarios/generated/xosc/aborted_merge_0000.xosc (v1.3)
+[] [info] Generated seed 1769309738
+[] [info] Loading scenarios/generated/xosc/safe_merge_0000.xosc (v1.3)
 [] [info] 0 variables
 [] [info] Loaded OpenDRIVE: scenarios/base/highway_3lane.xodr
 [] [info] Expr ${250/3.6} = 250/3.6 = 69.4444444444
@@ -25,12 +25,12 @@ esmini BUILD VERSION: 6144
 [0.000] [info] Init Ego TeleportAction initState -> startTransition -> runningState
 [0.000] [info] Starting teleport Action
 [0.000] [info] Ego New position:
-[0.000] [info] Pos(50.00, -7.50, 0.00) Rot(0.00, 0.00, 0.00) roadId 0 laneId -3 s 50.00 offset -0.00 t -7.50
+[0.000] [info] Pos(50.00, -4.50, 0.00) Rot(0.00, 0.00, 0.00) roadId 0 laneId -2 s 50.00 offset -0.00 t -4.50
 [0.000] [info] Init Ego LongitudinalAction initState -> startTransition -> runningState
 [0.000] [info] Init Target TeleportAction initState -> startTransition -> runningState
 [0.000] [info] Starting teleport Action
 [0.000] [info] Target New position:
-[0.000] [info] Pos(64.27, -4.50, 0.00) Rot(0.00, 0.00, 0.00) roadId 0 laneId -2 s 64.27 offset -0.00 t -4.50
+[0.000] [info] Pos(69.13, -1.50, 0.00) Rot(0.00, 0.00, 0.00) roadId 0 laneId -1 s 69.13 offset -0.00 t -1.50
 [0.000] [info] Init Target LongitudinalAction initState -> startTransition -> runningState
 [0.000] [info] storyBoard initState -> startTransition -> runningState
 [0.000] [info] story_act_maneuvuergroup_Ego_maneuver initState -> startTransition -> runningState
@@ -59,22 +59,4 @@ esmini BUILD VERSION: 6144
 [0.001] [info] maneuvuergroup_Target_maneuver initState -> startTransition -> runningState
 [0.001] [info] Target_maneuver initState -> startTransition -> runningState
 [0.001] [info] Target_event initState -> initToStandbyTransition -> standbyState
-[15.005] [info] stop_trigger: true, delay: 0.00, 15.0052 > 15.0000, edge: none
-[15.005] [info] Trigger /------------------------------------------------
-[15.005] [info] Group 0:
-[15.005] [info] stop_trigger: true
-[15.005] [info] Trigger  ------------------------------------------------/
-[15.005] [info] Ego_event standbyState -> stopTransition -> completeState
-[15.005] [info] Ego_maneuver runningState -> endTransition -> completeState
-[15.005] [info] maneuvuergroup_Ego_maneuver complete after 1 execution
-[15.005] [info] maneuvuergroup_Ego_maneuver runningState -> endTransition -> completeState
-[15.005] [info] act_maneuvuergroup_Ego_maneuver runningState -> endTransition -> completeState
-[15.005] [info] story_act_maneuvuergroup_Ego_maneuver runningState -> endTransition -> completeState
-[15.005] [info] Target_event standbyState -> stopTransition -> completeState
-[15.005] [info] Target_maneuver runningState -> endTransition -> completeState
-[15.005] [info] maneuvuergroup_Target_maneuver complete after 1 execution
-[15.005] [info] maneuvuergroup_Target_maneuver runningState -> endTransition -> completeState
-[15.005] [info] act_maneuvuergroup_Target_maneuver runningState -> endTransition -> completeState
-[15.005] [info] story_act_maneuvuergroup_Target_maneuver runningState -> endTransition -> completeState
-[15.005] [info] storyBoard runningState -> stopTransition -> completeState
-[15.005] [info] Closing
+[11.382] [info] Closing
