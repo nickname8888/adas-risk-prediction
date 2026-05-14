@@ -5,11 +5,16 @@ simulation:
 
 dataset:
   scenarios_per_family: 10
+  random_seed: 42
 
 road:
   length: 2000
   lane_count: 3
   lane_width: 3.0
+
+esmini:
+  executable_path: /home/nickname8888/esmini/bin/esmini
+  dat2csv_path: /home/nickname8888/esmini/bin/dat2csv
 
 output:
   xosc_dir: scenarios/generated/xosc
@@ -17,6 +22,7 @@ output:
   log_dir: outputs/logs
   csv_dir: outputs/trajectory_csv
   figure_dir: outputs/figures
+  trajectory_dir: outputs/trajectory_json
 
 visualization:
   bev_aspect_ratio: 6
