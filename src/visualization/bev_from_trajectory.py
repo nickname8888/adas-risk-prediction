@@ -8,13 +8,21 @@ import numpy as np
 # =========================================================
 
 BACKGROUND_COLOR = "#0e1117"
+
 ROAD_COLOR = "#2a2a2a"
+
 LANE_COLOR = "#e0e0e0"
+
 GRID_COLOR = "#444444"
+
 EGO_COLOR = "#00d4ff"
+
 TARGET_COLOR = "#ff6b35"
+
 EGO_MARKER_COLOR = "#008fb3"
+
 TARGET_MARKER_COLOR = "#cc5522"
+
 TIME_COLOR = "#ffffff"
 
 
@@ -43,22 +51,33 @@ LANE_BOUNDARIES = [
 # =========================================================
 
 def build_segments(x, y):
+
     points = np.array([x, y]).T.reshape(-1, 1, 2)
+
     segments = np.concatenate(
         [points[:-1], points[1:]],
         axis=1,
     )
+
     return segments
 
 
 def sample_time_indices(points):
+
     sampled = []
+
     last_second = -1
+
     for i, point in enumerate(points):
+
         current_second = int(point.t)
+
         if current_second != last_second:
+
             sampled.append(i)
+
             last_second = current_second
+
     return sampled
 
 
@@ -72,10 +91,15 @@ def plot_scenario_trajectory(
 ):
 
     ego_points = scenario_trajectory.ego.points
+
     target_points = scenario_trajectory.target.points
+
     ego_x = [p.x for p in ego_points]
+
     ego_y = [p.y for p in ego_points]
+
     target_x = [p.x for p in target_points]
+
     target_y = [p.y for p in target_points]
 
     # -----------------------------------------------------
@@ -111,6 +135,7 @@ def plot_scenario_trajectory(
     # -----------------------------------------------------
 
     for lane_y in LANE_BOUNDARIES:
+
         ax.plot(
             [0, 10000],
             [lane_y, lane_y],
@@ -125,6 +150,7 @@ def plot_scenario_trajectory(
     # -----------------------------------------------------
 
     for lane_y in LANE_CENTERS:
+
         ax.plot(
             [0, 10000],
             [lane_y, lane_y],
@@ -147,7 +173,7 @@ def plot_scenario_trajectory(
         ego_segments,
         linewidths=5,
         colors=EGO_COLOR,
-        alpha=0.75,
+        alpha=0.55,
         zorder=2,
     )
 
@@ -168,7 +194,7 @@ def plot_scenario_trajectory(
         target_segments,
         linewidths=7,
         colors=TARGET_COLOR,
-        alpha=0.95,
+        alpha=0.75,
         zorder=3,
     )
 
@@ -188,32 +214,56 @@ def plot_scenario_trajectory(
         target_points
     )
 
-    # Ego markers
+    # -----------------------------------------------------
+    # EGO MARKERS + LABELS
+    # -----------------------------------------------------
+
     for idx in ego_sample_indices:
+
         point = ego_points[idx]
+
         ax.scatter(
             point.x,
             point.y,
-            s=65,
+            s=140,
             color=EGO_MARKER_COLOR,
             edgecolors="white",
-            linewidths=1,
-            alpha=0.9,
-            zorder=5,
+            linewidths=1.8,
+            alpha=1.0,
+            zorder=10,
+            clip_on=False,
         )
 
-    # Target markers + labels
+        ax.text(
+            point.x,
+            point.y - 0.9,
+            f"{int(point.t)}s",
+            fontsize=9,
+            color=TIME_COLOR,
+            alpha=0.9,
+            ha="center",
+            fontweight="bold",
+            zorder=11,
+        )
+
+    # -----------------------------------------------------
+    # TARGET MARKERS + LABELS
+    # -----------------------------------------------------
+
     for idx in target_sample_indices:
+
         point = target_points[idx]
+
         ax.scatter(
             point.x,
             point.y,
-            s=75,
+            s=150,
             color=TARGET_MARKER_COLOR,
             edgecolors="white",
-            linewidths=1,
-            alpha=0.95,
-            zorder=6,
+            linewidths=1.8,
+            alpha=1.0,
+            zorder=10,
+            clip_on=False,
         )
 
         ax.text(
@@ -222,9 +272,10 @@ def plot_scenario_trajectory(
             f"{int(point.t)}s",
             fontsize=9,
             color=TIME_COLOR,
-            alpha=0.85,
+            alpha=0.9,
             ha="center",
             fontweight="bold",
+            zorder=11,
         )
 
     # -----------------------------------------------------
@@ -234,21 +285,21 @@ def plot_scenario_trajectory(
     ax.scatter(
         ego_x[0],
         ego_y[0],
-        s=260,
+        s=180,
         color=EGO_COLOR,
         edgecolors="white",
         linewidths=2.5,
-        zorder=7,
+        zorder=12,
     )
 
     ax.scatter(
         target_x[0],
         target_y[0],
-        s=260,
+        s=180,
         color=TARGET_COLOR,
         edgecolors="white",
         linewidths=2.5,
-        zorder=7,
+        zorder=12,
     )
 
     # -----------------------------------------------------
@@ -258,23 +309,23 @@ def plot_scenario_trajectory(
     ax.scatter(
         ego_x[-1],
         ego_y[-1],
-        s=360,
+        s=240,
         color=EGO_COLOR,
         marker="X",
         edgecolors="white",
         linewidths=2.5,
-        zorder=8,
+        zorder=13,
     )
 
     ax.scatter(
         target_x[-1],
         target_y[-1],
-        s=360,
+        s=240,
         color=TARGET_COLOR,
         marker="X",
         edgecolors="white",
         linewidths=2.5,
-        zorder=8,
+        zorder=13,
     )
 
     # -----------------------------------------------------
@@ -306,6 +357,7 @@ def plot_scenario_trajectory(
     )
 
     for text in legend.get_texts():
+
         text.set_color("white")
 
     # -----------------------------------------------------
@@ -313,11 +365,10 @@ def plot_scenario_trajectory(
     # -----------------------------------------------------
 
     ax.set_title(
-        f"ADAS Behavioral Trajectory: {scenario_trajectory.family}",
+        f"Trajectory Family: {scenario_trajectory.family}",
         fontsize=34,
         color="white",
         pad=24,
-        fontweight="bold",
     )
 
     ax.set_xlabel(
@@ -350,6 +401,7 @@ def plot_scenario_trajectory(
     )
 
     for spine in ax.spines.values():
+
         spine.set_color("white")
 
     # -----------------------------------------------------
