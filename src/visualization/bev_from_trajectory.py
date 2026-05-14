@@ -328,37 +328,37 @@ def plot_scenario_trajectory(
         zorder=13,
     )
 
-    # -----------------------------------------------------
-    # LEGEND
-    # -----------------------------------------------------
+    # # -----------------------------------------------------
+    # # LEGEND
+    # # -----------------------------------------------------
 
-    ax.plot(
-        [],
-        [],
-        color=EGO_COLOR,
-        linewidth=5,
-        alpha=0.8,
-        label="Ego Vehicle",
-    )
+    # ax.plot(
+    #     [],
+    #     [],
+    #     color=EGO_COLOR,
+    #     linewidth=5,
+    #     alpha=0.8,
+    #     label="Ego Vehicle",
+    # )
 
-    ax.plot(
-        [],
-        [],
-        color=TARGET_COLOR,
-        linewidth=7,
-        label="Target Vehicle",
-    )
+    # ax.plot(
+    #     [],
+    #     [],
+    #     color=TARGET_COLOR,
+    #     linewidth=7,
+    #     label="Target Vehicle",
+    # )
 
-    legend = ax.legend(
-        loc="upper right",
-        fontsize=20,
-        facecolor="#1c1c1c",
-        edgecolor="#555555",
-    )
+    # legend = ax.legend(
+    #     loc="upper right",
+    #     fontsize=20,
+    #     facecolor="#1c1c1c",
+    #     edgecolor="#555555",
+    # )
 
-    for text in legend.get_texts():
+    # for text in legend.get_texts():
 
-        text.set_color("white")
+    #     text.set_color("white")
 
     # -----------------------------------------------------
     # TITLES
